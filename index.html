@@ -19,6 +19,17 @@
             line-height: 1.6;
         }
 
+        /* --- Fade-in Animation --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- Layout Containers --- */
         .container {
             max-width: 1200px;
@@ -29,6 +40,8 @@
         header {
             text-align: center;
             padding: 3rem 1rem;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.1) 0%, rgba(245,230,200,0.5) 100%);
+            padding-bottom: 4rem;
         }
         header h1 {
             margin: 0;
@@ -38,6 +51,17 @@
             border-bottom: 2px solid #8b6914;
             display: inline-block;
             padding-bottom: 0.5rem;
+            position: relative;
+        }
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #8b6914;
         }
 
         /* --- Navigation: Responsive --- */
@@ -71,11 +95,16 @@
         nav a:hover {
             color: #8b6914;
         }
+        .nav-active {
+            color: #8b6914;
+            border-bottom: 2px solid #8b6914;
+        }
 
         /* --- Sections --- */
         section {
             padding: 3rem 0;
             border-bottom: 1px solid rgba(139, 105, 20, 0.15);
+            scroll-margin-top: 60px;
         }
         section h2 {
             border-left: 5px solid #8b6914;
@@ -105,12 +134,14 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             background: #fff;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(139,105,20,0.15);
         }
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
         }
         .card img {
             width: 100%;
@@ -123,6 +154,27 @@
             text-align: center;
             font-size: 0.9rem;
             font-weight: bold;
+        }
+
+        /* --- Player Showcase --- */
+        .player-showcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .player-showcase img {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(139,105,20,0.25);
+            background: #fff;
+            padding: 1rem;
+        }
+        .player-showcase figcaption {
+            font-size: 1rem;
+            color: #8b6914;
+            font-style: italic;
         }
 
         /* --- Project Info --- */
@@ -160,6 +212,7 @@
             text-align: center;
             padding: 3rem 1rem;
             margin-top: 4rem;
+            border-top: 3px solid #8b6914;
         }
         .footer-content {
             font-size: 0.95rem;
@@ -189,25 +242,34 @@
         <nav>
             <ul>
                 <li><a href="#video">Showcase</a></li>
+                <li><a href="#player">Player</a></li>
                 <li><a href="#in-code">Work</a></li>
                 <li><a href="#under-work">Under Work</a></li>
                 <li><a href="#world">Backgrounds</a></li>
                 <li><a href="#chairs">Chairs</a></li>
                 <li><a href="#curtains">Curtains</a></li>
                 <li><a href="#stages">Stages</a></li>
-                <li><a href="#backgrounds-logos">Assets</a></li>
+                <li><a href="#backgrounds-logos">Assets & UI</a></li>
             </ul>
         </nav>
 
         <main>
-            <section id="video">
+            <section id="video" class="fade-in">
                 <h2>Development Progress</h2>
                 <div class="video-card">
                     <video src="Progress Update.webm" controls></video>
                 </div>
             </section>
 
-            <section id="in-code">
+            <section id="player" class="fade-in">
+                <h2>Player — Main Character</h2>
+                <figure class="player-showcase">
+                    <img src="Player/main character_animation.png" alt="Main Character Animation">
+                    <figcaption>Main character sprite sheet — animation frames</figcaption>
+                </figure>
+            </section>
+
+            <section id="in-code" class="fade-in">
                 <h2>Project Status</h2>
                 <div class="text-section">
                     <h3>Saya's Contributions</h3>
@@ -217,7 +279,7 @@
                 </div>
             </section>
 
-            <section id="under-work">
+            <section id="under-work" class="fade-in">
                 <h2>Under Work/Progress</h2>
                 <div class="gallery-grid">
                     <figure class="card">
@@ -227,7 +289,7 @@
                 </div>
             </section>
 
-            <section id="world">
+            <section id="world" class="fade-in">
                 <h2>World — Backgrounds</h2>
                 <div class="gallery-grid">
                     <figure class="card">
@@ -245,7 +307,7 @@
                 </div>
             </section>
 
-            <section id="chairs">
+            <section id="chairs" class="fade-in">
                 <h2>Shop — Chairs</h2>
                 <div class="gallery-grid">
                     <figure class="card"><img src="ShopSeperated/shop-1/chair1.png" alt="C1"><figcaption>Chair 1</figcaption></figure>
@@ -254,7 +316,7 @@
                 </div>
             </section>
 
-            <section id="curtains">
+            <section id="curtains" class="fade-in">
                 <h2>Shop — Curtains</h2>
                 <div class="gallery-grid">
                     <figure class="card"><img src="ShopSeperated/shop-1/curtain1.png" alt="Cu1"><figcaption>Curtain 1</figcaption></figure>
@@ -263,7 +325,7 @@
                 </div>
             </section>
 
-            <section id="stages">
+            <section id="stages" class="fade-in">
                 <h2>Shop — Stages</h2>
                 <div class="gallery-grid">
                     <figure class="card"><img src="ShopSeperated/shop-1/stage1.png" alt="S1"><figcaption>Stage 1</figcaption></figure>
@@ -272,25 +334,53 @@
                 </div>
             </section>
 
-            <section id="backgrounds-logos">
-                <h2>Backgrounds & Logos</h2>
+            <section id="backgrounds-logos" class="fade-in">
+                <h2>Assets & UI</h2>
                 <div class="gallery-grid">
                     <figure class="card"><img src="ShopSeperated/shop-1/shop_background.png" alt="Shop"><figcaption>Shop UI</figcaption></figure>
                     <figure class="card"><img src="ShopSeperated/shop-1/stage_background.png" alt="Stage"><figcaption>Stage UI</figcaption></figure>
                     <figure class="card"><img src="ShopSeperated/shop-1/chair_logo.png" alt="Chair L"><figcaption>Chair Icon</figcaption></figure>
                     <figure class="card"><img src="ShopSeperated/shop-1/curtain_logo.png" alt="Curtain L"><figcaption>Curtain Icon</figcaption></figure>
                     <figure class="card"><img src="ShopSeperated/shop-1/stage_logo.png" alt="Stage L"><figcaption>Stage Icon</figcaption></figure>
+                    <figure class="card"><img src="buy/buying.png" alt="Buy Panel"><figcaption>Buy Panel</figcaption></figure>
+                    <figure class="card"><img src="buy/select_buying.png" alt="Buy Selected State"><figcaption>Buy Selected State</figcaption></figure>
+                    <figure class="card"><img src="buy/ coin.png" alt="Coin Icon"><figcaption>Coin Icon</figcaption></figure>
+                    <figure class="card"><img src="ShopSeperated/shop-1/pop_up_window.png" alt="Pop-up Window"><figcaption>Pop-up Window</figcaption></figure>
+                    <figure class="card"><img src="ShopSeperated/shop-1/lock.png" alt="Lock Icon"><figcaption>Lock Icon</figcaption></figure>
+                    <figure class="card"><img src="ShopSeperated/shop-1/chairs&curtains_background.png" alt="Chairs & Curtains BG"><figcaption>Chairs & Curtains BG</figcaption></figure>
                 </div>
             </section>
         </main>
 
         <footer>
             <div class="footer-content">
+                <p>The Act of Babylon — Game Progress</p>
                 <p><strong>Artist:</strong> Saya6817 / <span class="arabic">سدرة محسن</span></p>
                 <p><strong>Dev:</strong> Saaeb / <span class="arabic">صاعب سعد</span></p>
             </div>
         </footer>
     </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Update nav active
+                    const id = entry.target.id;
+                    const navLink = document.querySelector(`nav a[href="#${id}"]`);
+                    if (navLink) {
+                        document.querySelectorAll('nav a').forEach(a => a.classList.remove('nav-active'));
+                        navLink.classList.add('nav-active');
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 
 </body>
 </html>
